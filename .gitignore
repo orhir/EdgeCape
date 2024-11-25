@@ -1,0 +1,17 @@
+.eggs/*
+.vscode/*
+EdgeCape.egg-info/*
+work_dir*
+work_dis*
+ckpt/*
+*/__pycache__
+*.pyc
+data/*
+data
+result_keypoints.json
+*.pth
+*.zip
+*.pdf!/
+runai.py
+rename_ckpt.py
+.idea
