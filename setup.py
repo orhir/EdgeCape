@@ -44,7 +44,7 @@ def get_hash():
         sha = get_git_hash()[:7]
     elif os.path.exists(version_file):
         try:
-            from capeformer.version import __version__
+            from EdgeCape.version import __version__
             sha = __version__.split('+')[-1]
         except ImportError:
             raise ImportError('Unable to get git version')
@@ -62,7 +62,7 @@ short_version = '{}'
 version_info = ({})
 """
     sha = get_hash()
-    with open('capeformer/VERSION', 'r') as f:
+    with open('EdgeCape/VERSION', 'r') as f:
         SHORT_VERSION = f.read().strip()
     VERSION_INFO = ', '.join(SHORT_VERSION.split('.'))
     VERSION = SHORT_VERSION + '+' + sha
@@ -89,12 +89,12 @@ def get_requirements(filename='requirements.txt'):
 if __name__ == '__main__':
     write_version_py()
     setup(
-        name='capeformer',
+        name='edgecape',
         version=get_version(),
         description='A template for pytorch projects.',
         long_description=readme(),
         packages=find_packages(exclude=('configs', 'tools', 'demo')),
-        package_data={'capeformer.ops': ['*/*.so']},
+        package_data={'edgecape.ops': ['*/*.so']},
         classifiers=[
             'Development Status :: 4 - Beta',
             'License :: OSI Approved :: Apache Software License',
