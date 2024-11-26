@@ -1,6 +1,6 @@
 # Edge Weight Prediction For Category-Agnostic Pose Estimation
 <a href="https://orhir.github.io/edge_cape/"><img src="https://img.shields.io/static/v1?label=Project&message=Website&color=blue"></a>
-<a href=""><img src="https://img.shields.io/badge/arXiv-2311.17891-b31b1b.svg"></a>
+<a href=""><img src="https://img.shields.io/badge/arXiv-311.17891-b31b1b.svg"></a>
 <a href="https://www.apache.org/licenses/LICENSE-2.0.txt">
 <img src="https://img.shields.io/badge/License-Apache-yellow"></a>
 
@@ -15,7 +15,7 @@ This repo is the official implementation of "[Edge Weight Prediction For Categor
 
 
 ## 🔔 News
-- **`20 November 2024`** Initial Code Release
+- **`25 November 2024`** Initial Code Release
 
 
 ## Introduction
@@ -24,10 +24,16 @@ Given only one example image and skeleton,  our method refines the skeleton to e
 Using our method, given a support image and skeleton we can refine the structure for better pose estimation on images from unseen categories.
 
 ## Citation
-If you find this useful, please cite this work as follows:
+Please consider citing our paper and GraphCape if you found our work useful:
 ```bibtex
-@misc{
-
+@misc{hirschorn2024edgeweightpredictioncategoryagnostic,
+      title={Edge Weight Prediction For Category-Agnostic Pose Estimation}, 
+      author={Or Hirschorn and Shai Avidan},
+      year={2024},
+      eprint={2411.16665},
+      archivePrefix={arXiv},
+      primaryClass={cs.CV},
+      url={https://arxiv.org/abs/2411.16665}, 
 }
 
 @misc{hirschorn2023pose,
