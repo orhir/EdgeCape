@@ -10,7 +10,7 @@ def readme():
     return content
 
 
-version_file = 'capeformer/version.py'
+version_file = 'EdgeCape/version.py'
 
 
 def get_git_hash():
