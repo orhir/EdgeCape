@@ -72,7 +72,7 @@ python setup.py develop
 ```
 
 ## MP-100 Dataset
-Please follow the [official guide](https://github.com/orhir/PoseAnything) to prepare the MP-100 dataset for training and evaluation, and organize the data structure properly.
+Please follow [Pose Anything](https://github.com/orhir/PoseAnything) to prepare the MP-100 dataset for training and evaluation, and organize the data structure properly.
 
 ## Training
 
