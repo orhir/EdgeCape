@@ -10,7 +10,7 @@ By [Or Hirschorn](https://scholar.google.co.il/citations?user=GgFuT_QAAAAJ&hl=iw
 This repo is the official implementation of "[Edge Weight Prediction For Category-Agnostic Pose Estimation
 ](https://arxiv.org/abs/2411.16665)".
 
-# [Hugging Face Demo](https://huggingface.co/spaces/orhir/EdgeCape) is now available!
+## [Hugging Face Demo](https://huggingface.co/spaces/orhir/EdgeCape) is now available!
 
 ## 🔔 News
 - **`12 December 2024`** HuggingFace Demo is live.
