@@ -1,6 +1,7 @@
 .eggs/*
 .vscode/*
 EdgeCape.egg-info/*
+edgecape.egg-info/*
 work_dir*
 work_dis*
 ckpt/*
@@ -15,3 +16,4 @@ result_keypoints.json
 runai.py
 rename_ckpt.py
 .idea
+demo

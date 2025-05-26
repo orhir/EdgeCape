@@ -219,7 +219,7 @@ class TwoStageHead(nn.Module):
             layer_outputs_unsig = layer_delta_unsig + inverse_sigmoid(out_points[idx])
             output_kpts.append(layer_outputs_unsig.sigmoid())
 
-        return torch.stack(output_kpts, dim=0), initial_proposals, similarity_map, reconstructed_keypoints
+        return torch.stack(output_kpts, dim=0), initial_proposals, similarity_map, reconstructed_keypoints, adj
 
     def get_loss(self, output, initial_proposals, similarity_map, target,
                  target_heatmap, target_weight, target_sizes, reconstructed_keypoints):
@@ -230,7 +230,7 @@ class TwoStageHead(nn.Module):
             num_dec_layer, bs, nq = output.shape[:3]
             normalizer = target_weight.squeeze(dim=-1).sum(dim=-1)  # [bs, ]
             normalizer[normalizer == 0] = 1
-            reconstructed_keypoints, mask_indices = reconstructed_keypoints
+            reconstructed_keypoints = reconstructed_keypoints
             support_gt_keypoints = target / target_sizes.to(output.device)
             pred_loss = F.l1_loss(reconstructed_keypoints, support_gt_keypoints, reduction="none")
             pred_loss = pred_loss.sum(dim=-1, keepdim=False) * target_weight.squeeze(dim=-1)

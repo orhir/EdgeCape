@@ -99,12 +99,12 @@ class EdgeCape(BasePose):
         """Defines the computation performed at every call when training."""
         bs, _, h, w = img_q.shape
         random_mask = kwargs.get('rand_mask', None)
-        output, initial_proposals, similarity_map, mask_s, reconstructed_keypoints = self.predict(img_s,
-                                                                                                  target_s,
-                                                                                                  target_weight_s,
-                                                                                                  img_q,
-                                                                                                  img_metas,
-                                                                                                  random_mask)
+        output, initial_proposals, similarity_map, mask_s, reconstructed_keypoints, adj = self.predict(img_s,
+                                                                                                       target_s,
+                                                                                                       target_weight_s,
+                                                                                                       img_q,
+                                                                                                       img_metas,
+                                                                                                       random_mask)
 
         # parse the img meta to get the target keypoints
         device = output.device
@@ -149,12 +149,12 @@ class EdgeCape(BasePose):
 
         """Defines the computation performed at every call when testing."""
         batch_size, _, img_height, img_width = img_q.shape
-        output, initial_proposals, similarity_map, mask_s, reconstructed_keypoints = self.predict(img_s,
-                                                                                                  target_s,
-                                                                                                  target_weight_s,
-                                                                                                  img_q,
-                                                                                                  img_metas
-                                                                                                  )
+        output, initial_proposals, similarity_map, mask_s, reconstructed_keypoints, adj = self.predict(img_s,
+                                                                                                       target_s,
+                                                                                                       target_weight_s,
+                                                                                                       img_q,
+                                                                                                       img_metas
+                                                                                                       )
         predicted_pose = output[-1].detach().cpu().numpy()
         result = {}
 
@@ -166,6 +166,7 @@ class EdgeCape(BasePose):
             result.update({"points": torch.cat((initial_proposals[None], output)).cpu().numpy()})
 
         result.update({"sample_image_file": [img_metas[i]['sample_image_file'] for i in range(len(img_metas))]})
+        result.update({"skeleton": adj[0].cpu().numpy()})
 
         return result
 
@@ -185,10 +186,10 @@ class EdgeCape(BasePose):
         feature_q, feature_s = self.extract_features(img_s, img_q)
         skeleton_lst = [i['sample_skeleton'][0] for i in img_metas]
 
-        (output, initial_proposals, similarity_map, reconstructed_keypoints) = self.keypoint_head_module(
+        output, initial_proposals, similarity_map, reconstructed_keypoints, adj = self.keypoint_head_module(
             feature_q, feature_s, target_s, mask_s, skeleton_lst, random_mask=random_mask)
 
-        return output, initial_proposals, similarity_map, mask_s, reconstructed_keypoints
+        return output, initial_proposals, similarity_map, mask_s, reconstructed_keypoints, adj
 
     def extract_features(self, img_s, img_q):
         with torch.no_grad():

@@ -49,7 +49,7 @@ def main():
     if not os.path.exists(final_epoch_path):
 
         print("Running Base Model Training")
-        subprocess.run(['python', 'train.py', '--config', config, '--work-dir', base_workdir])
+        # subprocess.run(['python', 'train.py', '--config', config, '--work-dir', base_workdir])
 
     # -----------------------------SKELETON MODEL TRAINING--------------------------------
     skeleton_work_dir = f'{work_dir}/base_skeleton'

@@ -42,7 +42,6 @@ WORKDIR EdgeCape
 COPY EdgeCape EdgeCape/EdgeCape
 COPY configs EdgeCape/configs
 COPY requirements.txt EdgeCape/
-COPY tools EdgeCape/tools
 COPY setup.cfg EdgeCape/
 COPY setup.py EdgeCape/
 COPY test.py EdgeCape/
