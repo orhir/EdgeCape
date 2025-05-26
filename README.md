@@ -1,8 +1,8 @@
 # Edge Weight Prediction For Category-Agnostic Pose Estimation
 <a href="https://orhir.github.io/edge_cape/"><img src="https://img.shields.io/static/v1?label=Project&message=Website&color=blue"></a>
 <a href="https://arxiv.org/pdf/2411.16665"><img src="https://img.shields.io/badge/arXiv-311.17891-b31b1b.svg"></a>
-<a href="https://www.apache.org/licenses/LICENSE-2.0.txt">
-<img src="https://img.shields.io/badge/License-Apache-yellow"></a>
+[![Hugging Face](https://img.shields.io/badge/%F0%9F%A4%97%20Hugging%20Face-Spaces-blue)](https://huggingface.co/spaces/orhir/EdgeCape)
+<a href="https://www.apache.org/licenses/LICENSE-2.0.txt"><img src="https://img.shields.io/badge/License-Apache-yellow"></a>
 
 
 By [Or Hirschorn](https://scholar.google.co.il/citations?user=GgFuT_QAAAAJ&hl=iw&oi=ao) and [Shai Avidan](https://scholar.google.co.il/citations?hl=iw&user=hpItE1QAAAAJ)
@@ -10,11 +10,10 @@ By [Or Hirschorn](https://scholar.google.co.il/citations?user=GgFuT_QAAAAJ&hl=iw
 This repo is the official implementation of "[Edge Weight Prediction For Category-Agnostic Pose Estimation
 ](https://arxiv.org/abs/2411.16665)".
 
-# Hugging Face Demo Coming Soon!
-### Stay tuned for the upcoming demo release!
-
+## [Hugging Face Demo](https://huggingface.co/spaces/orhir/EdgeCape) is now available!
 
 ## 🔔 News
+- **`12 December 2024`** HuggingFace Demo is live.
 - **`25 November 2024`** Initial Code Release
 
 
@@ -72,7 +71,7 @@ python setup.py develop
 ```
 
 ## MP-100 Dataset
-Please follow the [official guide](https://github.com/orhir/PoseAnything) to prepare the MP-100 dataset for training and evaluation, and organize the data structure properly.
+Please follow [Pose Anything](https://github.com/orhir/PoseAnything) to prepare the MP-100 dataset for training and evaluation, and organize the data structure properly.
 
 ## Training
 
