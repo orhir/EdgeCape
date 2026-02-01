@@ -59,7 +59,7 @@ model = dict(
     ),
     keypoint_head=dict(
         type='TwoStageHead',
-        in_channels=768,
+        in_channels=384,
         transformer=dict(
             type='TwoStageSupportRefineTransformer',
             d_model=256,
@@ -67,7 +67,7 @@ model = dict(
             num_encoder_layers=3,
             num_decoder_layers=3,
 
-            dim_feedforward=768,
+            dim_feedforward=384,
             dropout=0.1,
             similarity_proj_dim=256,
             dynamic_proj_dim=128,
@@ -94,7 +94,7 @@ model = dict(
         modulate_kernel=11))
 
 data_cfg = dict(
-    image_size=[256, 256],
+    image_size=[224, 224],
     heatmap_size=[64, 64],
     num_output_channels=channel_cfg['num_output_channels'],
     num_joints=channel_cfg['dataset_joints'],

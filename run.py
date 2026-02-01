@@ -64,7 +64,6 @@ def main():
     new_cfg = Config.fromfile(args.config)
     new_cfg.load_from = load_from
     new_cfg.total_epochs = args.ft_epochs
-    new_cfg.model.freeze_backbone = True
     new_cfg.model.keypoint_head.skeleton_head['learn_skeleton'] = True
     new_cfg.model.keypoint_head.learn_skeleton = True
     new_cfg.model.keypoint_head.masked_supervision = True

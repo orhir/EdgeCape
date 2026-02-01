@@ -12,7 +12,7 @@ class SkeletonPredictor(nn.Module):
                  d_model=256,
                  nhead=8,
                  num_layers=3,
-                 dim_feedforward=768,
+                 dim_feedforward=384,
                  dropout=0.1,
                  activation="relu",
                  normalize_before=False,
@@ -134,11 +134,8 @@ class SkeletonPredictor(nn.Module):
     def predict_skeleton(self, kp_features, kp_mask, gt_adj):
         bs, num_pts, _ = kp_features.shape
         # Self-attention matrix from kp_features
-        kp_features = kp_features.permute(1, 0, 2) * ~kp_mask.transpose(0, 1).unsqueeze(-1)
-        q_kp = self.q_proj(kp_features).contiguous().view(num_pts, bs * self.num_heads, -1).transpose(0, 1)
-        k_kp = self.k_proj(kp_features).contiguous().view(num_pts, bs * self.num_heads, -1).transpose(0, 1)
-        attn = torch.bmm(q_kp, k_kp.transpose(1, 2)).view(bs, self.num_heads, num_pts, num_pts)
-        unnormalized_adj_matrix = self.mh_linear(attn).squeeze(1)
+        kp_features = kp_features / (kp_features.norm(dim=-1, keepdim=True) + 1e-8)
+        unnormalized_adj_matrix = torch.bmm(kp_features, kp_features.transpose(1, 2))
         unnormalized_adj_matrix = (unnormalized_adj_matrix + unnormalized_adj_matrix.transpose(1, 2)) / 2
         unnormalized_adj_matrix = self.combine_adj(gt_adj, unnormalized_adj_matrix)
         unnormalized_adj_matrix = self.activation(unnormalized_adj_matrix)

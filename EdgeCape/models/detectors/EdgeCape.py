@@ -23,7 +23,6 @@ class EdgeCape(BasePose):
         encoder_config (dict): Config for encoder.
         train_cfg (dict): Config for training. Default: None.
         test_cfg (dict): Config for testing. Default: None.
-        freeze_backbone (bool): If True, freeze backbone. Default: False.
     """
 
     def __init__(self,
@@ -31,16 +30,11 @@ class EdgeCape(BasePose):
                  encoder_config,
                  train_cfg=None,
                  test_cfg=None,
-                 freeze_backbone=False):
+                 pretrained='dinov2_vits14',):
         super().__init__()
-        feature_output_setting = encoder_config.get('output', 'dense-cls')
-        model_name = encoder_config.get('model_name', 'vits14')
-        self.encoder_sample = self.encoder_query = DINO(output=feature_output_setting, model_name=model_name)
-        self.probe = DPT(input_dims=self.encoder_query.feat_dim, output_dim=768)
-        self.backbone = 'dino_extractor'
-        self.freeze_backbone = freeze_backbone
-        if keypoint_head.get('freeze', None) is not None:
-            self.freeze_backbone = True
+        repo = 'facebookresearch/dinov2'
+        self.encoder_sample = self.encoder_query = torch.hub.load(repo, pretrained)
+        self.backbone = 'dinov2'
 
         self.keypoint_head_module = builder.build_head(keypoint_head)
         self.keypoint_head_module.init_weights()
@@ -55,10 +49,8 @@ class EdgeCape(BasePose):
         """Check if has keypoint_head."""
         return hasattr(self, 'keypoint_head_module')
 
-    def init_weights(self, pretrained=None):
+    def init_weights(self):
         """Weight initialization for model."""
-        self.encoder_sample.init_weights(pretrained)
-        self.encoder_query.init_weights(pretrained)
         self.keypoint_head_module.init_weights()
 
     def forward(self,
@@ -193,15 +185,8 @@ class EdgeCape(BasePose):
 
     def extract_features(self, img_s, img_q):
         with torch.no_grad():
-            dino_feature_s = [self.encoder_sample(img) for img in img_s]
-            dino_feature_q = self.encoder_query(img_q)  # [bs, 3, h, w]
-        if self.freeze_backbone:
-            with torch.no_grad():
-                feature_s = [self.probe(f) for f in dino_feature_s]
-                feature_q = self.probe(dino_feature_q)
-        else:
-            feature_s = [self.probe(f) for f in dino_feature_s]
-            feature_q = self.probe(dino_feature_q)
+            feature_q = self.encoder_query.get_intermediate_layers(img_q, n=1, reshape=True)[0]  # [bs, c, h, w]
+            feature_s = [self.encoder_sample.get_intermediate_layers(img, n=1, reshape=True)[0] for img in img_s]
 
         return feature_q, feature_s
 
