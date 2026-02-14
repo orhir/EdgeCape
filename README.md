@@ -1,4 +1,4 @@
-# Edge Weight Prediction For Category-Agnostic Pose Estimation
+# Edge Weight Prediction For Category-Agnostic Pose Estimation [ICLR 2026]
 <a href="https://orhir.github.io/edge_cape/"><img src="https://img.shields.io/static/v1?label=Project&message=Website&color=blue"></a>
 <a href="https://arxiv.org/pdf/2411.16665"><img src="https://img.shields.io/badge/arXiv-311.17891-b31b1b.svg"></a>
 [![Hugging Face](https://img.shields.io/badge/%F0%9F%A4%97%20Hugging%20Face-Spaces-blue)](https://huggingface.co/spaces/orhir/EdgeCape)
